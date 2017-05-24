@@ -1,25 +1,4 @@
 <resources>
-    <!--
-    TODO: Before you run your application, you need a Google Maps API key.
-
-    To get one, follow this link, follow the directions and press "Create" at the end:
-
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=FC:84:54:F2:E9:3B:A4:A8:83:45:21:79:C7:3D:30:23:A5:E9:3F:76%3Baia.com.wheely_map.activities
-
-    You can also add your credentials to an existing key, using these values:
-
-    Package name:
-    FC:84:54:F2:E9:3B:A4:A8:83:45:21:79:C7:3D:30:23:A5:E9:3F:76
-
-    SHA-1 certificate fingerprint:
-    FC:84:54:F2:E9:3B:A4:A8:83:45:21:79:C7:3D:30:23:A5:E9:3F:76
-
-    Alternatively, follow the directions here:
-    https://developers.google.com/maps/documentation/android/start#get-key
-
-    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
-    string in this file.
-    -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyDX5COaxbIFnckbvntsTvKXjhT4UGBE-Lo
     </string>
