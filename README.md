@@ -1,4 +1,4 @@
-# wheely-map
+# Wheely-Map
 
 ## Wheel Map is a open source project that has many goals to it.
 1. Help people that require a wheel chair ramp.
