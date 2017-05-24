@@ -3,9 +3,9 @@
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_aia_com_wheely_1map_MainActivity_getAPIKey(
+Java_aia_com_wheely_1map_MainActivity_someMethodName(
         JNIEnv *env,
-        jobject /* this */) {
-    std::string apiKey = "PLACE KEY HERE";
-    return env->NewStringUTF(apiKey.c_str());
+        jobject ) {
+    std::string something = "RETURN SOMETHING";
+    return env->NewStringUTF(something.c_str());
 }
