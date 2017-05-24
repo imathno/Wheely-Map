@@ -9,7 +9,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent map = new Intent(this, MapsActivity.class);
-        startActivity(map);
     }
 }
