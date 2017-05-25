@@ -61,3 +61,13 @@ gradlew
 gradlew.bat
 settings.gradle
 !/app/
+!/gradlew.bat
+!/gradlew
+!/gradle.properties
+!/gradle/
+!/build.gradle
+!/settings.gradle
+.gradle/
+app/.gitignore
+app/libs/
+app/src/main/res/drawable/
