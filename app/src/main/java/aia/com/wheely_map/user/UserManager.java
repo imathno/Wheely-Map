@@ -1,11 +1,9 @@
-package aia.com.wheely_map.managers;
+package aia.com.wheely_map.user;
 
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import aia.com.wheely_map.User;
 
 public abstract class UserManager {
 

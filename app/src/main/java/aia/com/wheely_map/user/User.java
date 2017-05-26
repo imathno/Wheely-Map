@@ -1,4 +1,4 @@
-package aia.com.wheely_map;
+package aia.com.wheely_map.user;
 
 import android.util.Log;
 
