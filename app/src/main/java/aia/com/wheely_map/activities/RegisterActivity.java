@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import aia.com.wheely_map.R;
+import aia.com.wheely_map.managers.UserManager;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,8 +30,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             EditText password = (EditText) findViewById(R.id.text_input_desired_password);
             EditText confirmPassword = (EditText) findViewById(R.id.text_input_confirm_password);
 
-            if (!password.equals(confirmPassword)) {
+            if (!password.getText().equals(confirmPassword.getText())) {
                 Toast.makeText(this, "Your password doesn't match", Toast.LENGTH_LONG).show();
+            } else if (UserManager.findUser(userName.getText().toString()) != null) {
+                Toast.makeText(this, "Username already taken", Toast.LENGTH_LONG).show();
+            } else {
+                UserManager.registerUser(userName);
             }
         }
     }
