@@ -14,14 +14,17 @@ import aia.com.wheely_map.managers.UserManager;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText username;
-    private EditText password;
+    private EditText usernameTextBox;
+    private EditText passwordTextBox;
     private User user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        usernameTextBox = (EditText) findViewById(R.id.text_input_username);
+        passwordTextBox = (EditText) findViewById(R.id.text_input_password);
 
         Button loginButton = (Button) findViewById(R.id.button_login);
         loginButton.setOnClickListener(this);
@@ -39,10 +42,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public boolean validLogin() {
-        username = (EditText) findViewById(R.id.text_input_username);
-        password = (EditText) findViewById(R.id.text_input_password);
-        user = UserManager.findUser(username.getText().toString());
-        if (user != null && user.getPassword().equals(password)) {
+        user = UserManager.findUser(usernameTextBox.getText().toString());
+        if (user != null && user.getPassword().equals(passwordTextBox)) {
             return true;
         }
         return false;

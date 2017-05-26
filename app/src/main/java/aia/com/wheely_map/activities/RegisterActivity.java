@@ -13,29 +13,36 @@ import aia.com.wheely_map.managers.UserManager;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private EditText usernameTextBox;
+    private EditText passwordTextBox;
+    private EditText confirmPasswordTextBox;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        usernameTextBox = (EditText) findViewById(R.id.text_input_desired_username);
+        passwordTextBox = (EditText) findViewById(R.id.text_input_desired_password);
+        confirmPasswordTextBox = (EditText) findViewById(R.id.text_input_confirm_password);
+
         Button registerButton = (Button) findViewById(R.id.button_register_user);
         registerButton.setOnClickListener(this);
     }
 
-    //TODO: ADD SO IT CHECKS USERNAME BEFORE MAKING THE ACCOUNT
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_register_user) {
-            EditText userName = (EditText) findViewById(R.id.text_input_desired_username);
-            EditText password = (EditText) findViewById(R.id.text_input_desired_password);
-            EditText confirmPassword = (EditText) findViewById(R.id.text_input_confirm_password);
+            String username = usernameTextBox.getText().toString();
+            String password = passwordTextBox.getText().toString();
 
-            if (!password.getText().equals(confirmPassword.getText())) {
+            if (!password.equals(confirmPasswordTextBox.getText().toString())) {
                 Toast.makeText(this, "Your password doesn't match", Toast.LENGTH_LONG).show();
-            } else if (UserManager.findUser(userName.getText().toString()) != null) {
+            } else if (UserManager.findUser(username) != null) {
                 Toast.makeText(this, "Username already taken", Toast.LENGTH_LONG).show();
             } else {
-                UserManager.registerUser(userName);
+                UserManager.registerUser(username, password);
+                Toast.makeText(this, "User registered", Toast.LENGTH_LONG).show();
             }
         }
     }
