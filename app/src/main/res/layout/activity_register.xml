@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/text_input_desired_username"
+        android:layout_width="@dimen/dimens_text_box_width_activity_login"
+        android:layout_height="@dimen/dimens_text_box_height_activity_login"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:hint="@string/text_box_username_hint_activity_login"
+        android:maxLength="@integer/length_text_box_username_max_input_Login_Activity" />
+
+    <EditText
+        android:id="@+id/text_input_desired_password"
+        android:layout_width="@dimen/dimens_text_box_width_activity_login"
+        android:layout_height="@dimen/dimens_text_box_height_activity_login"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:hint="@string/text_box_password_hint_activity_login"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/text_input_confirm_password"
+        android:layout_width="@dimen/dimens_text_box_width_activity_login"
+        android:layout_height="@dimen/dimens_text_box_height_activity_login"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:hint="@string/text_box_confirm_password_hint_activity_register"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/button_register_user"
+        android:layout_width="@dimen/dimens_button_width_activity_login"
+        android:layout_height="@dimen/dimens_text_box_height_activity_login"
+        android:text=""
+        android:layout_gravity="center" />
+</LinearLayout>
