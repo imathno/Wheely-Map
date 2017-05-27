@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import aia.com.wheely_map.R;
-import aia.com.wheely_map.managers.UserManager;
+import aia.com.wheely_map.user.UserManager;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 

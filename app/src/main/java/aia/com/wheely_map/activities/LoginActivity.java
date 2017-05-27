@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import aia.com.wheely_map.R;
-import aia.com.wheely_map.User;
-import aia.com.wheely_map.managers.UserManager;
+import aia.com.wheely_map.user.User;
+import aia.com.wheely_map.user.UserManager;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
