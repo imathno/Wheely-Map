@@ -1,10 +1,6 @@
 package aia.com.wheely_map.user;
 
-
-import android.test.mock.MockContext;
-
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
@@ -19,9 +15,18 @@ public class UserManagerTest {
     }
 
     @Test
+    public void registerUserTest() {
+        UserManager.registerUser("TEST", "TEST");
+        User test = UserManager.findUser("TEST");
+        assertTrue(test != null);
+    }
+
+    @Test
     public void addUserTest() {
-        UserManager.addUser(testUser);
-        assertTrue(UserManager.getRegisteredUserList().contains(testUser));
+        if (UserManager.getRegisteredUserList().contains(testUser)) {
+            UserManager.removeUser(testUser);
+        }
+        assertTrue(UserManager.addUser(testUser));
     }
 
     @Test
@@ -29,7 +34,14 @@ public class UserManagerTest {
         if (!UserManager.getRegisteredUserList().contains(testUser)) {
             UserManager.addUser(testUser);
         }
-        UserManager.removeUser(testUser);
-        assertTrue(!UserManager.getRegisteredUserList().contains(testUser));
+        assertTrue(UserManager.removeUser(testUser));
+    }
+
+    @Test
+    public void findUserTest() {
+        final User invalidUser = new User("Billy", "488");
+        UserManager.addUser(testUser);
+        assertTrue(UserManager.findUser(invalidUser.getUsername()) == null);
+        assertTrue(UserManager.findUser(testUser.getUsername()) != null);
     }
 }
