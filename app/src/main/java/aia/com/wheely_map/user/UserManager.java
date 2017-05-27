@@ -37,4 +37,26 @@ public abstract class UserManager {
         }
         return null;
     }
+
+    public static boolean addUser(User user) {
+        if (registeredUserList.contains(user)) {
+            return false;
+        }
+        registeredUserList.add(user);
+        Log.i(TAG, user.getUsername() + " added");
+        return true;
+    }
+
+    public static boolean removeUser(User user) {
+        if (registeredUserList.contains(user)) {
+            registeredUserList.remove(user);
+            Log.i(TAG, user.getUsername() + " removed");
+            return true;
+        }
+        return false;
+    }
+
+    public static List<User> getRegisteredUserList() {
+        return registeredUserList;
+    }
 }
