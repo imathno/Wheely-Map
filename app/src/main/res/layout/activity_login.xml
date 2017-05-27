@@ -26,5 +26,6 @@
         android:id="@+id/button_login"
         android:layout_width="@dimen/dimens_button_width_activity_login"
         android:layout_height="@dimen/dimens_text_box_height_activity_login"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:text="@string/button_text_login_activity_login"/>
 </LinearLayout>
