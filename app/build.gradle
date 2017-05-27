@@ -46,7 +46,6 @@ task wrapper(type: Wrapper) {
 }
 
 android {
-    // ...
     testOptions {
         unitTests.returnDefaultValues = true
     }
