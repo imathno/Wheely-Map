@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v.getId() == R.id.button_login) {
             if (validLogin()) {
                 UserManager.loginUser(user);
+                this.finish();
             } else {
                 Toast.makeText(this, "Wrong Username/Password", Toast.LENGTH_LONG).show();
             }
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public boolean validLogin() {
         user = UserManager.findUser(usernameTextBox.getText().toString());
-        if (user != null && user.getPassword().equals(passwordTextBox)) {
+        if (user != null && user.getPassword().equals(passwordTextBox.getText().toString())) {
             return true;
         }
         return false;
