@@ -6,6 +6,7 @@
 
     <EditText
         android:id="@+id/text_input_username"
+        android:layout_marginTop="60dp"
         android:layout_width="@dimen/dimens_text_box_width_activity_login"
         android:layout_height="@dimen/dimens_text_box_height_activity_login"
         android:layout_gravity="center"
