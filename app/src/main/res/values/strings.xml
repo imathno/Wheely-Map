@@ -13,4 +13,9 @@
     <string name="title_activity_register">Register</string>
     <string name="button_text_register_activity_register">Register</string>
     <string name="text_box_confirm_password_hint_activity_register">Confirm Password</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
