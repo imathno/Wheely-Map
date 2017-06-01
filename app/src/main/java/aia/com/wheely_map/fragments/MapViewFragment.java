@@ -11,6 +11,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import aia.com.wheely_map.R;
+import aia.com.wheely_map.map.MapManager;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
@@ -30,6 +31,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        MapManager.setGoogleMap(googleMap);
         mMap = googleMap;
     }
 }

@@ -10,9 +10,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import aia.com.wheely_map.R;
 import aia.com.wheely_map.fragments.MapViewFragment;
+import aia.com.wheely_map.map.MapManager;
 
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +34,8 @@ public class MainActivity extends FragmentActivity
         MapViewFragment fragment = new MapViewFragment();
         fragmentTransaction.add(R.id.map_container, fragment, TAG);
         fragmentTransaction.commit();
+
+        Toast.makeText(this, MapManager.registerRamp("TEST", 47.6062, 122.3321) + "", Toast.LENGTH_LONG).show();
     }
 
     //broken
