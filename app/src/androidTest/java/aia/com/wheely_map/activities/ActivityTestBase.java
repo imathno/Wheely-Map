@@ -3,7 +3,6 @@ package aia.com.wheely_map.activities;
 import org.junit.Before;
 
 import aia.com.wheely_map.user.User;
-import aia.com.wheely_map.user.UserManager;
 
 import static junit.framework.Assert.assertEquals;
 

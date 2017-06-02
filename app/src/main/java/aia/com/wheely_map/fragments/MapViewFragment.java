@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import aia.com.wheely_map.R;
+import aia.com.wheely_map.map.MapManager;
+import aia.com.wheely_map.map.Ramp;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
@@ -31,5 +35,12 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        for (Ramp addRamp : MapManager.getToAddMarkerList()) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(addRamp.getLATITUDE(), addRamp.getLONGITUDE()))
+                    .title(addRamp.getTITLE()));
+            MapManager.getToAddMarkerList().remove(addRamp);
+        }
     }
 }

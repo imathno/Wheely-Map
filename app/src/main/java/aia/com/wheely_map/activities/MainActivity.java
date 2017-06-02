@@ -10,9 +10,13 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import aia.com.wheely_map.R;
 import aia.com.wheely_map.fragments.MapViewFragment;
+import aia.com.wheely_map.map.MapManager;
+import aia.com.wheely_map.map.Ramp;
+import aia.com.wheely_map.user.User;
 
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,7 +38,7 @@ public class MainActivity extends FragmentActivity
         fragmentTransaction.commit();
     }
 
-    //broken
+    //THIS BROKEN GET HAMMER AND FIX IT
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

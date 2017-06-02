@@ -56,6 +56,10 @@ public abstract class UserManager {
         return false;
     }
 
+    public static User getLoggedInUser() {
+        return loggedInUser;
+    }
+
     public static List<User> getRegisteredUserList() {
         return registeredUserList;
     }
