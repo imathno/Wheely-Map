@@ -3,6 +3,8 @@
     package="aia.com.wheely_map">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -32,9 +34,6 @@
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login" />
 
-        <activity
-            android:name=".activities.RegisterActivity"
-            android:label="@string/title_activity_register" />
     </application>
 
 </manifest>

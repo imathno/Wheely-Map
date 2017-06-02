@@ -6,9 +6,11 @@
 
     /* Login Activity String Values */
     <string name="title_activity_login">Login</string>
-    <string name="text_box_username_hint_activity_login">Username</string>
     <string name="text_box_password_hint_activity_login">Password</string>
     <string name="button_text_login_activity_login">Login</string>
+    <string name="button_text_sign_out_activity_login">Sign Out</string>
+    <string name="button_text_revoke_access_activity_login">Revoke Access</string>
+
     /* Register Activity String Values */
     <string name="title_activity_register">Register</string>
     <string name="button_text_register_activity_register">Register</string>

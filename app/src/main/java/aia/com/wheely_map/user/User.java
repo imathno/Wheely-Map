@@ -2,18 +2,23 @@ package aia.com.wheely_map.user;
 
 import android.util.Log;
 
+import com.google.android.gms.plus.model.people.Person;
+
 public class User {
 
     private static final String TAG = User.class.getSimpleName();
 
+    private Person user;
+
     private String username;
-    private String password;
+    private final String USER_ID;
 
     private long userPoints;
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public User(Person user) {
+        this.user = user;
+        username = user.getDisplayName();
+        USER_ID = user.getId();
         this.userPoints = 0;
     }
 
@@ -41,11 +46,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    @Deprecated
-    public String getPassword() {
-        return password;
     }
 
     public long getUserPoints() {
