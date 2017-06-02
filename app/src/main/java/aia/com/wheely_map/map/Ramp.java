@@ -8,7 +8,7 @@ import aia.com.wheely_map.user.User;
 
 public class Ramp {
 
-    public final User REGISTERED_BY;
+    private final User REGISTERED_BY;
 
     private final String TITLE;
     private final double LATITUDE;
@@ -19,17 +19,6 @@ public class Ramp {
         this.TITLE = title;
         this.LATITUDE = latitude;
         this.LONGITUDE = longitude;
-    }
-
-    public boolean placeMarker() {
-        GoogleMap map = MapManager.getGoogleMap();
-        if (map != null) {
-            MapManager.getGoogleMap().addMarker(new MarkerOptions()
-                    .position(new LatLng(LATITUDE, LONGITUDE))
-                    .title(TITLE));
-            return true;
-        }
-        return false;
     }
 
     public String getTITLE() {
