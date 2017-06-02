@@ -21,6 +21,10 @@ public class Ramp {
         this.LONGITUDE = longitude;
     }
 
+    public User getREGISTERED_BY() {
+        return REGISTERED_BY;
+    }
+
     public String getTITLE() {
         return TITLE;
     }

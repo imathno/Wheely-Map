@@ -1,9 +1,5 @@
 package aia.com.wheely_map.map;
 
-import android.util.Log;
-
-import com.google.android.gms.maps.GoogleMap;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +9,11 @@ public abstract class MapManager {
 
     private static final String TAG = MapManager.class.getSimpleName();
 
-    private static GoogleMap gMap;
-
     private static List<Ramp> registeredRamps = new ArrayList<>();
     private static List<Ramp> toAddMarker = new ArrayList<>();
 
     public static boolean registerRamp(String title, double latitude, double longitude) {
-        if (findRamp(longitude, latitude) == null && gMap != null) {
+        if (findRamp(longitude, latitude) == null) {
             Ramp newRamp = new Ramp(UserManager.getLoggedInUser(), title, longitude, latitude);
             registeredRamps.add(newRamp);
             addMarker(newRamp);
@@ -32,10 +26,6 @@ public abstract class MapManager {
         toAddMarker.add(ramp);
     }
 
-    public static List<Ramp> getToAddMarkerList() {
-        return toAddMarker;
-    }
-
     public static Ramp findRamp(double latitude, double longitude) {
         for (Ramp ramp : registeredRamps) {
             if (ramp.getLATITUDE() == latitude && ramp.getLONGITUDE() == longitude) {
@@ -43,5 +33,13 @@ public abstract class MapManager {
             }
         }
         return null;
+    }
+
+    public static List<Ramp> getRegisteredRamps() {
+        return registeredRamps;
+    }
+
+    public static List<Ramp> getToAddMarkerList() {
+        return toAddMarker;
     }
 }
