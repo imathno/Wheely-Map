@@ -7,5 +7,9 @@
     <dimen name="dimens_button_height_activity_login">40dp</dimen>
     <dimen name="dimens_padding_activity_login">24dp</dimen>
 
-    <integer name="length_text_box_username_max_input_Login_Activity">15</integer>
+    /* Register Ramp Activity Dimensions */
+    <dimen name="dimens_description_text_box_width_register_ramp_activity">240dp</dimen>
+    <dimen name="dimens_description_text_box_height_register_ramp_activity">240dp</dimen>
+    <dimen name="dimens_image_view_width_register_ramp_activity">200dp</dimen>
+    <dimen name="dimens_image_view_height_register_ramp_activity">300dp</dimen>
 </resources>

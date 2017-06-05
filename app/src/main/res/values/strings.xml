@@ -18,4 +18,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    /* Register Ramp Activity */
+    <string name="button_text_fab_register_ramp_activity">Camera</string>
+    <string name="edit_text_description_hint_register_ramp_activity">Description</string>
 </resources>
