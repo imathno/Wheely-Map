@@ -8,6 +8,8 @@
     <dimen name="dimens_padding_activity_login">24dp</dimen>
 
     /* Register Ramp Activity Dimensions */
+    <dimen name="dimens_fab_width_register_ramp_activity">60dp</dimen>
+    <dimen name="dimens_fab_height_register_ramp_activity">60dp</dimen>
     <dimen name="dimens_description_text_box_width_register_ramp_activity">240dp</dimen>
     <dimen name="dimens_description_text_box_height_register_ramp_activity">240dp</dimen>
     <dimen name="dimens_image_view_width_register_ramp_activity">200dp</dimen>
