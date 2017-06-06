@@ -1,6 +1,5 @@
 package aia.com.wheely_map.activities;
 
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,13 +9,9 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import aia.com.wheely_map.R;
 import aia.com.wheely_map.fragments.MapViewFragment;
-import aia.com.wheely_map.map.MapManager;
-import aia.com.wheely_map.map.Ramp;
-import aia.com.wheely_map.user.User;
 
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {

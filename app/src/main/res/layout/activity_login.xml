@@ -12,7 +12,7 @@
         android:layout_centerInParent="true"
         android:visibility="visible"
         tools:visibility="gone" />
-
+    
     <Button
         android:id="@+id/sign_out_button"
         android:layout_width="@dimen/dimens_button_width_activity_login"

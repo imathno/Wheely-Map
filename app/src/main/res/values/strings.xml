@@ -1,25 +1,29 @@
 <resources>
     <string name="app_name">Wheely-Map</string>
 
-    /* Maps Activity String Values */
+    /* Main Activity String Values */
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    /* Maps Fragment String Values */
     <string name="title_activity_maps">Map</string>
 
     /* Login Activity String Values */
     <string name="title_activity_login">Login</string>
     <string name="text_box_password_hint_activity_login">Password</string>
     <string name="button_text_login_activity_login">Login</string>
+
     <string name="button_text_sign_out_activity_login">Sign Out</string>
     <string name="button_text_revoke_access_activity_login">Revoke Access</string>
     <string name="text_logged_in">Logged In</string>
     <string name="text_signed_out">Signed Out</string>
 
-    /* Register Activity String Values */
-    <string name="title_activity_register">Register</string>
-    <string name="button_text_register_activity_register">Register</string>
-    <string name="text_box_confirm_password_hint_activity_register">Confirm Password</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    /* Register Ramp Activity */
+    <string name="title_activity_register_ramp">Register Wheel Chair Ramp</string>
+    <string name="button_text_current_location_register_ramp_activity">Get Current Location</string>
+    <string name="button_text_register_ramp_register_ramp_activity">Register Ramp</string>
+    <string name="edit_text_description_hint_register_ramp_activity">Description</string>
 </resources>
