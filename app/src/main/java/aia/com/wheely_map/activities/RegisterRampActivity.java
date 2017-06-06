@@ -26,7 +26,7 @@ public class RegisterRampActivity extends AppCompatActivity
         implements View.OnClickListener,
         OnMapReadyCallback {
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private GoogleMap gMap;
 

@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Wheely-Map</string>
 
-    /* Maps Activity String Values */
+    /* Main Activity String Values */
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    /* Maps Fragment String Values */
     <string name="title_activity_maps">Map</string>
 
     /* Login Activity String Values */
@@ -9,20 +13,10 @@
     <string name="text_box_username_hint_activity_login">Username</string>
     <string name="text_box_password_hint_activity_login">Password</string>
     <string name="button_text_login_activity_login">Login</string>
-    /* Register Activity String Values */
-    <string name="title_activity_register">Register</string>
-    <string name="button_text_register_activity_register">Register</string>
-    <string name="text_box_confirm_password_hint_activity_register">Confirm Password</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
 
     /* Register Ramp Activity */
     <string name="title_activity_register_ramp">Register Wheel Chair Ramp</string>
     <string name="button_text_current_location_register_ramp_activity">Get Current Location</string>
     <string name="button_text_register_ramp_register_ramp_activity">Register Ramp</string>
-    <string name="button_text_fab_register_ramp_activity">Camera</string>
     <string name="edit_text_description_hint_register_ramp_activity">Description</string>
 </resources>
