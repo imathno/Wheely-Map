@@ -10,6 +10,8 @@
     <string name="button_text_login_activity_login">Login</string>
     <string name="button_text_sign_out_activity_login">Sign Out</string>
     <string name="button_text_revoke_access_activity_login">Revoke Access</string>
+    <string name="text_logged_in">Logged In</string>
+    <string name="text_signed_out">Signed Out</string>
 
     /* Register Activity String Values */
     <string name="title_activity_register">Register</string>

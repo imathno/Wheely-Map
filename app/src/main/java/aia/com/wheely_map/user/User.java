@@ -2,20 +2,21 @@ package aia.com.wheely_map.user;
 
 import android.util.Log;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.plus.model.people.Person;
 
 public class User {
 
     private static final String TAG = User.class.getSimpleName();
 
-    private Person user;
+    private GoogleSignInAccount user;
 
     private String username;
     private final String USER_ID;
 
     private long userPoints;
 
-    public User(Person user) {
+    public User(GoogleSignInAccount user) {
         this.user = user;
         username = user.getDisplayName();
         USER_ID = user.getId();

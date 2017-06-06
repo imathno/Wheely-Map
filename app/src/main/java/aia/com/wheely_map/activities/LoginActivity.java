@@ -1,9 +1,11 @@
 package aia.com.wheely_map.activities;
 
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,11 +13,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
@@ -24,30 +33,22 @@ import aia.com.wheely_map.user.User;
 import aia.com.wheely_map.user.UserManager;
 
 public class LoginActivity extends AppCompatActivity
-        implements GoogleApiClient.ConnectionCallbacks,
-                    GoogleApiClient.OnConnectionFailedListener,
+        implements GoogleApiClient.OnConnectionFailedListener,
                     View.OnClickListener {
 
     private static String TAG = LoginActivity.class.getSimpleName();
 
+    private static final int RC_SIGN_IN = 9001;
+
     private SignInButton mSignInButton;
     private Button mSignOutButton;
-    private Button mRevokeButton;
     private TextView mStatus;
 
     private GoogleApiClient mGoogleApiClient;
+    private GoogleSignInAccount acct;
 
-    private static final int STATE_SIGNED_IN = 0;
-    private static final int STATE_SIGN_IN = 1;
-    private static final int STATE_IN_PROGRESS = 2;
-    private int mSignInProgress;
+    private ProgressDialog mProgressDialog;
 
-    private PendingIntent mSignInIntent;
-    private int mSignInError;
-
-    private static final int RC_SIGN_IN = 0;
-
-    private static final int DIALOG_PLAY_SERVICES_ERROR = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,144 +57,155 @@ public class LoginActivity extends AppCompatActivity
 
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
         mSignOutButton = (Button) findViewById(R.id.sign_out_button);
-        mRevokeButton = (Button) findViewById(R.id.revoke_access_button);
         mStatus = (TextView) findViewById(R.id.sign_in_status);
 
+        mSignInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        mSignInButton.setOnClickListener(this);
         mSignOutButton.setOnClickListener(this);
-        mSignOutButton.setOnClickListener(this);
-        mRevokeButton.setOnClickListener(this);
 
         mGoogleApiClient = buildApiClient();
     }
 
-    public GoogleApiClient buildApiClient(){
+    public GoogleApiClient buildApiClient() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
         return new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Plus.API, Plus.PlusOptions.builder().build())
-                .addScope(new Scope(Scopes.PROFILE))
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+
+        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+        if (opr.isDone()) {
+            Log.d(TAG, "Got cached sign-in");
+            GoogleSignInResult result = opr.get();
+            handleSignInResult(result);
+        } else {
+            showProgressDialog();
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(GoogleSignInResult googleSignInResult) {
+                    hideProgressDialog();
+                    handleSignInResult(googleSignInResult);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideProgressDialog();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        Log.d(TAG, "handleSignInResult:" + result.getStatus().getStatusMessage());
+        Log.d(TAG, "handleSignInResult:" + result.getStatus().hasResolution());
+        if (result.isSuccess()) {
+            acct = result.getSignInAccount();
+            User user = new User(acct);
+            mStatus.setText(R.string.text_logged_in);
+            UserManager.setLoggedInUser(user);
+            updateUI(true);
+        } else {
+            updateUI(false);
+        }
+    }
+
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        Log.d(TAG, status.getStatusMessage());
+                        updateUI(false);
+                    }
+                });
+    }
+
+    private void revokeAccess() {
+        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        Log.d(TAG, status.getStatusMessage());
+                        updateUI(false);
+                    }
+                });
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        if (connectionResult.hasResolution()) {
+            Log.d(TAG, "Connection Failed Resolution: " + connectionResult.getResolution().toString());
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
     }
 
-    @Override
-    public void onConnectionSuspended(int cause) {
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onConnected(Bundle connectionHint) {
-        Log.i(TAG, "onConnected");
-
-        mSignInButton.setEnabled(false);
-        mSignOutButton.setEnabled(true);
-        mRevokeButton.setEnabled(true);
-
-        mSignInProgress = STATE_SIGNED_IN;
-
-        Person currentUser = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-        mStatus.setText(String.format("Signed In to G+ as %s", currentUser.getDisplayName()));
-
-        User loggedInUser = new User(currentUser);
-        UserManager.setLoggedInUser(loggedInUser);
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        Log.i(TAG, "onConnectionFailed: ConnectionResult.getErrorCode() = "
-                + result.getErrorCode());
-
-        if (mSignInProgress != STATE_IN_PROGRESS) {
-            mSignInIntent = result.getResolution();
-            mSignInError = result.getErrorCode();
-
-            if (mSignInProgress == STATE_SIGN_IN) {
-                resolveSignInError();
-            }
+    private void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage("Loading");
+            mProgressDialog.setIndeterminate(true);
         }
-
-        onSignedOut();
+        mProgressDialog.show();
     }
 
-    private void resolveSignInError() {
-        if (mSignInIntent != null) {
-            try {
-                mSignInProgress = STATE_IN_PROGRESS;
-                startIntentSenderForResult(mSignInIntent.getIntentSender(),
-                        RC_SIGN_IN, null, 0, 0, 0);
-            } catch (IntentSender.SendIntentException e) {
-                Log.i(TAG, "Sign in intent could not be sent: "
-                        + e.getLocalizedMessage());
-                mSignInProgress = STATE_SIGN_IN;
-                mGoogleApiClient.connect();
-            }
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.hide();
+        }
+    }
+
+    private void updateUI(boolean signedIn) {
+        if (signedIn) {
+            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
         } else {
-            showDialog(DIALOG_PLAY_SERVICES_ERROR);
+            mStatus.setText(R.string.text_signed_out);
+            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        switch (requestCode) {
-            case RC_SIGN_IN:
-                if (resultCode == RESULT_OK) {
-                    mSignInProgress = STATE_SIGN_IN;
-                } else {
-                    mSignInProgress = STATE_SIGNED_IN;
-                }
-
-                if (!mGoogleApiClient.isConnecting()) {
-                    mGoogleApiClient.connect();
-                }
-                break;
-        }
-    }
-
-    private void onSignedOut() {
-        mSignInButton.setEnabled(true);
-        mSignOutButton.setEnabled(false);
-        mRevokeButton.setEnabled(false);
-
-        mStatus.setText("Signed out");
-
-        UserManager.logOutUser();
     }
 
     @Override
     public void onClick(View v) {
-        if (!mGoogleApiClient.isConnecting()) {
-            switch (v.getId()) {
-                case R.id.sign_in_button:
-                    mStatus.setText("Signing In");
-                    resolveSignInError();
-                    break;
-                case R.id.sign_out_button:
-                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-                    mGoogleApiClient.disconnect();
-                    mGoogleApiClient.connect();
-                    break;
-                case R.id.revoke_access_button:
-                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-                    Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient);
-                    mGoogleApiClient = buildApiClient();
-                    mGoogleApiClient.connect();
-                    break;
-            }
+        switch (v.getId()) {
+            case R.id.sign_in_button:
+                signIn();
+                break;
+            case R.id.sign_out_button:
+                signOut();
+                break;
         }
     }
 }
