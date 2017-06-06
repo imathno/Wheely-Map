@@ -17,6 +17,7 @@ import aia.com.wheely_map.fragments.MapViewFragment;
 import aia.com.wheely_map.map.MapManager;
 import aia.com.wheely_map.map.Ramp;
 import aia.com.wheely_map.user.User;
+import aia.com.wheely_map.user.UserManager;
 
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
