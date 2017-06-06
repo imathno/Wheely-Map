@@ -31,6 +31,9 @@ public class MainActivity extends FragmentActivity
         MapViewFragment fragment = new MapViewFragment();
         fragmentTransaction.add(R.id.map_container, fragment, TAG);
         fragmentTransaction.commit();
+
+        Intent login = new Intent(this, LoginActivity.class);
+        startActivity(login);
     }
 
     //THIS BROKEN GET HAMMER AND FIX IT
