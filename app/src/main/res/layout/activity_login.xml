@@ -11,8 +11,7 @@
         android:layout_height="@dimen/dimens_text_box_height_activity_login"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:hint="@string/text_box_username_hint_activity_login"
-        android:maxLength="@integer/length_text_box_username_max_input_Login_Activity" />
+        android:hint="@string/text_box_username_hint_activity_login" />
 
     <EditText
         android:id="@+id/text_input_password"

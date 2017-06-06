@@ -12,9 +12,9 @@ public abstract class MapManager {
     private static List<Ramp> registeredRamps = new ArrayList<>();
     private static List<Ramp> toAddMarker = new ArrayList<>();
 
-    public static boolean registerRamp(String title, double latitude, double longitude) {
+    public static boolean registerRamp(String description, double latitude, double longitude) {
         if (findRamp(longitude, latitude) == null) {
-            Ramp newRamp = new Ramp(UserManager.getLoggedInUser(), title, longitude, latitude);
+            Ramp newRamp = new Ramp(UserManager.getLoggedInUser(), description, longitude, latitude);
             registeredRamps.add(newRamp);
             addMarker(newRamp);
             return true;

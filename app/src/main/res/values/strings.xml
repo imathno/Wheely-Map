@@ -18,4 +18,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    /* Register Ramp Activity */
+    <string name="title_activity_register_ramp">Register Wheel Chair Ramp</string>
+    <string name="button_text_current_location_register_ramp_activity">Get Current Location</string>
+    <string name="button_text_register_ramp_register_ramp_activity">Register Ramp</string>
+    <string name="button_text_fab_register_ramp_activity">Camera</string>
+    <string name="edit_text_description_hint_register_ramp_activity">Description</string>
 </resources>
