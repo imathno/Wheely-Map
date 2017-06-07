@@ -27,15 +27,13 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Goo
 
     private GoogleMap mMap;
 
-    private SupportMapFragment mapFragment;
-
     private static Map<Marker, Ramp> markerMap = new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map, container, false);
-        mapFragment = (SupportMapFragment) this.getChildFragmentManager()
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
 
