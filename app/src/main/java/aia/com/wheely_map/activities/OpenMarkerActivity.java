@@ -25,7 +25,7 @@ public class OpenMarkerActivity extends AppCompatActivity {
         latitude = bundle.getDouble("lat");
         longitude = bundle.getDouble("long");
         description = bundle.getString("description");
-        rampImage = (Bitmap) bundle.get("rampImage");
+        rampImage = null;
 
         ImageView imageView = (ImageView) findViewById(R.id.image_ramp);
 

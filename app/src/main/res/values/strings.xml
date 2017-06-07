@@ -25,4 +25,6 @@
     <string name="button_text_current_location_register_ramp_activity">Get Current Location</string>
     <string name="button_text_register_ramp_register_ramp_activity">Register Ramp</string>
     <string name="edit_text_description_hint_register_ramp_activity">Description</string>
+
+    <string name="title_open_marker_activity">Ramp Information</string>
 </resources>

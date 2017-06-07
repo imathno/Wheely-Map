@@ -1,5 +1,7 @@
 package aia.com.wheely_map.map;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public abstract class RampManager {
                     description,
                     null,
                     longitude, latitude);
+            Log.d(TAG, "registerRamp newRamp:" + newRamp);
             registeredRamps.add(newRamp);
             addMarker(newRamp);
             return true;
@@ -31,6 +34,7 @@ public abstract class RampManager {
 
     public static Ramp findRamp(double latitude, double longitude) {
         for (Ramp ramp : registeredRamps) {
+            Log.d(TAG, "findRamp:" + ramp);
             if (ramp.getLatitude() == latitude && ramp.getLongitude() == longitude) {
                 return ramp;
             }

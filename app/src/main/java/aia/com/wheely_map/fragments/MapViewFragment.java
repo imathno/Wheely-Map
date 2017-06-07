@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import aia.com.wheely_map.map.Ramp;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+    private static final String TAG = MapViewFragment.class.getSimpleName();
+
     private GoogleMap mMap;
 
     private static Map<Marker, Ramp> markerMap = new HashMap<>();
@@ -43,6 +46,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Goo
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.addMarker(new MarkerOptions().position(new LatLng(47.6062, 122.3321)));
         mMap.setOnMarkerClickListener(this);
     }
 
@@ -57,17 +61,11 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Goo
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        Ramp clickedRamp = markerMap.get(marker);
-
-        if (clickedRamp != null) {
             Intent openMarker = new Intent(getContext(), OpenMarkerActivity.class);
-            openMarker.putExtra("lat", clickedRamp.getLatitude());
-            openMarker.putExtra("long", clickedRamp.getLongitude());
-            openMarker.putExtra("description", clickedRamp.getDescription());
-            openMarker.putExtra("rampImage", clickedRamp.getRampImage());
+            openMarker.putExtra("lat", 47.6062);
+            openMarker.putExtra("long", 122.3321);
+            openMarker.putExtra("description", "What's good cuzzo");
             startActivity(openMarker);
             return true;
-        }
-        return false;
     }
 }
