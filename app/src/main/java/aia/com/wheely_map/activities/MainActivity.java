@@ -49,9 +49,11 @@ public class MainActivity extends FragmentActivity
         Intent activity;
 
         switch (item.getItemId()) {
+            /*
             case R.id.nav_login : fragment.update();
                 activity = new Intent(this, LoginActivity.class);
                 break;
+            */
             case R.id.nav_register_ramp : activity = new Intent(this, RegisterRampActivity.class);
                 break;
             default : activity = null;

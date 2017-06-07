@@ -46,7 +46,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Goo
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.addMarker(new MarkerOptions().position(new LatLng(47.6062, 122.3321)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(47.6062, -122.3321)));
         mMap.setOnMarkerClickListener(this);
     }
 
