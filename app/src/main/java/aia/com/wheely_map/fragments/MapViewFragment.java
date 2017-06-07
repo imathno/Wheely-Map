@@ -47,7 +47,6 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Goo
     }
 
     public void update() {
-        mapFragment.getMapAsync(this);
         for (Ramp addRamp : RampManager.getToAddMarkerList()) {
             Marker newMarker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(addRamp.getLatitude(), addRamp.getLongitude())));
