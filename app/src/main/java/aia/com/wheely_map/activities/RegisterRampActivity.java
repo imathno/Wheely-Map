@@ -20,7 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import aia.com.wheely_map.R;
-import aia.com.wheely_map.map.MapManager;
+import aia.com.wheely_map.map.RampManager;
 
 public class RegisterRampActivity extends AppCompatActivity
         implements View.OnClickListener,
@@ -62,8 +62,7 @@ public class RegisterRampActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");
@@ -72,24 +71,16 @@ public class RegisterRampActivity extends AppCompatActivity
     }
 
     private void getDeviceLocation() {
-        if (mLocationPermissionGranted && gMap != null) {
-            currentLocation = gMap.getMyLocation();
-        } else {
-            Toast.makeText(this, "Something Broke", Toast.LENGTH_LONG).show();
-        }
+        currentLocation = null;
     }
 
-    @Override
-    public void onClick(View v) {
+    @Override public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_current_location :
-                getDeviceLocation();
+            case R.id.button_current_location : getDeviceLocation();
                 break;
-            case R.id.image_view_ramp :
-                dispatchTakePictureIntent();
+            case R.id.image_view_ramp : dispatchTakePictureIntent();
                 break;
-            case R.id.button_register_ramp :
-                buildRamp();
+            case R.id.button_register_ramp : buildRamp();
                 this.finish();
                 break;
         }
@@ -100,9 +91,7 @@ public class RegisterRampActivity extends AppCompatActivity
             errorHandler();
             return;
         }
-        MapManager.registerRamp(mDescriptionBox.getText().toString(),
-                currentLocation.getLatitude(),
-                currentLocation.getLongitude());
+        RampManager.registerRamp(mDescriptionBox.getText().toString(), -1, -1);
     }
 
     private void errorHandler() {
@@ -113,8 +102,7 @@ public class RegisterRampActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public void onMapReady(GoogleMap map) {
+    @Override public void onMapReady(GoogleMap map) {
         gMap = map;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = false;

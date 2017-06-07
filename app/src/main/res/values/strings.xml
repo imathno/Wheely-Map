@@ -4,6 +4,8 @@
     /* Main Activity String Values */
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_item_text_login">Login</string>
+    <string name="nav_item_text_register_ramp">Register Ramp</string>
 
     /* Maps Fragment String Values */
     <string name="title_activity_maps">Map</string>
@@ -18,12 +20,11 @@
     <string name="text_logged_in">Logged In</string>
     <string name="text_signed_out">Signed Out</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
     /* Register Ramp Activity */
     <string name="title_activity_register_ramp">Register Wheel Chair Ramp</string>
     <string name="button_text_current_location_register_ramp_activity">Get Current Location</string>
     <string name="button_text_register_ramp_register_ramp_activity">Register Ramp</string>
     <string name="edit_text_description_hint_register_ramp_activity">Description</string>
+
+    <string name="title_open_marker_activity">Ramp Information</string>
 </resources>

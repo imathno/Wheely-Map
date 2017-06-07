@@ -18,6 +18,7 @@
         android:layout_width="@dimen/dimens_button_width_activity_login"
         android:layout_height="wrap_content"
         android:text="@string/button_text_sign_out_activity_login"
+        android:gravity="center"
         android:visibility="visible"
         tools:visibility="gone" />
 
@@ -26,6 +27,7 @@
         android:layout_width="@dimen/dimens_text_box_width_activity_login"
         android:layout_height="@dimen/dimens_text_box_height_activity_login"
         android:layout_gravity="bottom"
+        android:gravity="center"
         android:layout_below="@+id/sign_out_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp" />

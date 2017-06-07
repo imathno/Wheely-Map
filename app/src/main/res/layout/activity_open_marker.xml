@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/image_ramp"
+        android:layout_width="341dp"
+        android:layout_height="@dimen/dimens_image_view_width_register_marker_activity"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="0.14" />
+
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="@dimen/dimens_text_view_width_open_marker_activity"
+        android:layout_height="135dp"
+        android:gravity="center"
+        android:layout_gravity="center" />
+
+</LinearLayout>
