@@ -23,6 +23,16 @@ public class User {
         this.userPoints = 0;
     }
 
+    public User(boolean test) {
+        if (test) {
+            this.username = "TEST";
+            this.USER_ID = "TEST";
+            this.userPoints = 0;
+        } else {
+            USER_ID = "TEST";
+        }
+    }
+
     public void setUserPoints(long points) {
         this.userPoints = points;
     }

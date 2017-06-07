@@ -4,7 +4,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_login"
-            android:title="Login" />
+            android:title="@string/nav_item_text_login" />
+
+        <item
+            android:id="@+id/nav_register_ramp"
+            android:title="@string/nav_item_text_register_ramp" />
     </group>
 
 </menu>

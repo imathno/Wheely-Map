@@ -20,4 +20,10 @@
     <dimen name="dimens_image_view_height_register_ramp_activity">300dp</dimen>
     <dimen name="dimens_button_width_register_ramp_activity">75dp</dimen>
     <dimen name="dimens_button_height_register_ramp_activity">30dp</dimen>
+
+
+    <dimen name="dimens_image_view_width_register_marker_activity">200dp</dimen>
+    <dimen name="dimens_image_view_height_register_marker_activity">300dp</dimen>
+    <dimen name="dimens_text_view_width_open_marker_activity">240dp</dimen>
+    <dimen name="dimens_text_view_height_open_marker_activity">240dp</dimen>
 </resources>
