@@ -28,7 +28,7 @@ public abstract class RampManager {
 
     public static Ramp findRamp(double latitude, double longitude) {
         for (Ramp ramp : registeredRamps) {
-            if (ramp.getLATITUDE() == latitude && ramp.getLONGITUDE() == longitude) {
+            if (ramp.getLatitude() == latitude && ramp.getLONGITUDE() == longitude) {
                 return ramp;
             }
         }

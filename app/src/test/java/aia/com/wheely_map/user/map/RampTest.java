@@ -33,7 +33,7 @@ public class RampTest {
         double lat = Math.random() * 2000, lng = Math.random() * 2000;
         Ramp testRamp = new Ramp(testUser, "TEST", lat, lng);
 
-        assertEquals(lat, testRamp.getLATITUDE());
+        assertEquals(lat, testRamp.getLatitude());
         assertEquals(lng, testRamp.getLONGITUDE());
     }
     */

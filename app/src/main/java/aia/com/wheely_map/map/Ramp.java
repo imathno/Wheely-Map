@@ -1,8 +1,6 @@
 package aia.com.wheely_map.map;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import android.graphics.Bitmap;
 
 import aia.com.wheely_map.user.User;
 
@@ -10,30 +8,36 @@ public class Ramp {
 
     private final User REGISTERED_BY;
 
-    private final String TITLE;
-    private final double LATITUDE;
-    private final double LONGITUDE;
+    private String description;
+    private Bitmap rampImage;
+    private double latitude;
+    private double longitude;
 
-    public Ramp(User registeredBy, String title, double latitude, double longitude) {
+    public Ramp(User registeredBy, String description, Bitmap rampImage, double latitude, double longitude) {
         this.REGISTERED_BY = registeredBy;
-        this.TITLE = title;
-        this.LATITUDE = latitude;
-        this.LONGITUDE = longitude;
+        this.description = description;
+        this.rampImage = rampImage;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public User getREGISTERED_BY() {
         return REGISTERED_BY;
     }
 
-    public String getTITLE() {
-        return TITLE;
+    public String getDescription() {
+        return description;
     }
 
-    public double getLATITUDE() {
-        return LATITUDE;
+    public Bitmap getRampImage() {
+        return rampImage;
     }
 
-    public double getLONGITUDE() {
-        return LONGITUDE;
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 }

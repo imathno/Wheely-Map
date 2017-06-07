@@ -10,16 +10,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import aia.com.wheely_map.R;
 import aia.com.wheely_map.map.RampManager;
 import aia.com.wheely_map.map.Ramp;
 
-public class MapViewFragment extends Fragment implements OnMapReadyCallback {
+public class MapViewFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
@@ -38,12 +38,19 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(this);
         List<Ramp> toAddMarker = RampManager.getToAddMarkerList();
         for (Ramp addRamp : toAddMarker) {
             mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(addRamp.getLATITUDE(), addRamp.getLONGITUDE()))
-                    .title(addRamp.getTITLE()));
+                    .position(new LatLng(addRamp.getLatitude(), addRamp.getLongitude())));
             RampManager.getToAddMarkerList().remove(addRamp);
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        LatLng position = marker.getPosition();
+        RampManager.findRamp(position.latitude, position.longitude);
+        return true;
     }
 }
