@@ -5,9 +5,9 @@ import java.util.List;
 
 import aia.com.wheely_map.user.UserManager;
 
-public abstract class MapManager {
+public abstract class RampManager {
 
-    private static final String TAG = MapManager.class.getSimpleName();
+    private static final String TAG = RampManager.class.getSimpleName();
 
     private static List<Ramp> registeredRamps = new ArrayList<>();
     private static List<Ramp> toAddMarker = new ArrayList<>();
