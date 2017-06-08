@@ -23,6 +23,11 @@ public class User {
         this.userPoints = 0;
     }
 
+    public User() {
+        username = "TEST";
+        USER_ID = "TEST";
+    }
+
     public void setUserPoints(long points) {
         this.userPoints = points;
     }

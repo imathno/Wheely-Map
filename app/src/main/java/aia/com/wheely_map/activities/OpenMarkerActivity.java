@@ -8,13 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import aia.com.wheely_map.R;
+import aia.com.wheely_map.map.Ramp;
 
 public class OpenMarkerActivity extends AppCompatActivity {
-
-    private double latitude;
-    private double longitude;
-    private String description;
-    private Bitmap rampImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,15 +18,12 @@ public class OpenMarkerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open_marker);
 
         Bundle bundle = getIntent().getExtras();
-        latitude = bundle.getDouble("lat");
-        longitude = bundle.getDouble("long");
-        description = bundle.getString("description");
-        rampImage = null;
+        Ramp ramp = (Ramp) bundle.get("ramp");
+        String description = ramp.getDescription();
+        Bitmap rampImage = ramp.getRampImage();
 
         ImageView imageView = (ImageView) findViewById(R.id.image_ramp);
-
         imageView.setImageBitmap(rampImage);
-
 
         TextView textView = (TextView) findViewById(R.id.text_description);
         textView.setText(description);

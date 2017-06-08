@@ -117,7 +117,5 @@ public class RegisterRampActivity extends AppCompatActivity
             mLocationPermissionGranted = false;
             return;
         }
-        mLocationPermissionGranted = true;
-        gMap.setMyLocationEnabled(true);
     }
 }

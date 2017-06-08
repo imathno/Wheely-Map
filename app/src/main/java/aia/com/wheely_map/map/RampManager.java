@@ -14,7 +14,7 @@ public abstract class RampManager {
 
     public static boolean registerRamp(String description, double latitude, double longitude) {
         if (findRamp(longitude, latitude) == null) {
-            Ramp newRamp = new Ramp(UserManager.getLoggedInUser(), description, longitude, latitude);
+            Ramp newRamp = new Ramp(UserManager.getLoggedInUser(), description, null, longitude, latitude);
             registeredRamps.add(newRamp);
             addMarker(newRamp);
             return true;
@@ -28,7 +28,7 @@ public abstract class RampManager {
 
     public static Ramp findRamp(double latitude, double longitude) {
         for (Ramp ramp : registeredRamps) {
-            if (ramp.getLatitude() == latitude && ramp.getLONGITUDE() == longitude) {
+            if (ramp.getLatitude() == latitude && ramp.getLongitude() == longitude) {
                 return ramp;
             }
         }
