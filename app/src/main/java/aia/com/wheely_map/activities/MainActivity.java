@@ -22,44 +22,40 @@ import aia.com.wheely_map.map.Ramp;
 import aia.com.wheely_map.map.RampManager;
 import aia.com.wheely_map.user.User;
 import aia.com.wheely_map.user.UserManager;
+import aia.com.wheely_map.utils.ActivityUtils;
+
+import static aia.com.wheely_map.utils.ActivityUtils.openActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private MapFragment mMapFragment;
+    private MapsFragment mMapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         User user = new User();
         UserManager.setLoggedInUser(user);
 
         RampManager.registerRamp("TEST", 47.6062, -122);
-        RampManager.registerRamp("TEST", 47.6062, -150);
+
+        setUpMapFragment();
 
         FragmentManager fragmentManager = getFragmentManager();
-        mMapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map_frag);
+        fragmentManager.beginTransaction().add(R.id.map_container, mMapFragment).commit();
 
         setContentView(R.layout.activity_main);
 
         registerListeners();
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        setUpMapFragment();
-    }
-
     private void setUpMapFragment() {
         if (mMapFragment == null) {
-            mMapFragment = MapsFragment.newInstance();
+            mMapFragment = MapsFragment.getInstance();
         }
-        getFragmentManager().beginTransaction()
-                .add(R.id.map_container, mMapFragment)
-                .commit();
     }
 
     private void registerListeners() {
@@ -90,10 +86,5 @@ public class MainActivity extends AppCompatActivity
             case R.id.fab_main : openActivity(this, RegisterRampActivity.class);
                 break;
         }
-    }
-
-    private void openActivity(Context context, Class<?> cls) {
-        Intent activity = new Intent(context, cls);
-        startActivity(activity);
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -18,18 +19,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import aia.com.wheely_map.activities.OpenMarkerActivity;
 import aia.com.wheely_map.map.Ramp;
 import aia.com.wheely_map.map.RampManager;
+
+import static aia.com.wheely_map.utils.ActivityUtils.openActivity;
 
 public class MapsFragment extends MapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static final String TAG = MapsFragment.class.getSimpleName();
 
     private static MapsFragment instance;
+    private static List<Ramp> rampsOnMap;
 
     private GoogleMap mMap;
-
-    private static List<Ramp> rampsOnMap;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,32 +44,30 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = super.onCreateView(inflater, container, savedInstanceState);
-        v.setVisibility(View.VISIBLE);
-        return v;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         Log.d(TAG, "onMapReady GoogleMap googleMap:" + googleMap);
-
         setUpMap();
-
-        for (Ramp ramp : RampManager.getToAddMarkerList()) {
-            if (!rampsOnMap.contains(ramp)) {
-                mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(ramp.getLatitude(), ramp.getLongitude())));
-                rampsOnMap.add(ramp);
-                rampsOnMap.add(ramp);
-            }
-        }
     }
 
     private void setUpMap() {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(47.6062, -122.3321)));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(47.6062, -122)));
+        loadMarkers();
         mMap.setOnMarkerClickListener(this);
+    }
+
+    private void loadMarkers() {
+        if (mMap != null) {
+            for (Ramp ramp : RampManager.getToAddMarkerList()) {
+                mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(ramp.getLatitude(), ramp.getLongitude())));
+            }
+        }
     }
 
     public boolean setMarker(Ramp ramp) {
@@ -86,7 +87,10 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
     @Override
     public boolean onMarkerClick(Marker marker) {
         LatLng position = marker.getPosition();
-        RampManager.findRamp(position.latitude, position.longitude);
+        Ramp clickedMarker = RampManager.findRamp(position.latitude, position.longitude);
+        if (clickedMarker != null) {
+            openActivity(getContext(), OpenMarkerActivity.class);
+        }
         return true;
     }
 
