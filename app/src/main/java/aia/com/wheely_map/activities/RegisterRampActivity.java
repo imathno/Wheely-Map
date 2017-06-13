@@ -20,7 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import aia.com.wheely_map.R;
-import aia.com.wheely_map.map.MapManager;
+import aia.com.wheely_map.map.RampManager;
 
 public class RegisterRampActivity extends AppCompatActivity
         implements View.OnClickListener,
@@ -33,7 +33,6 @@ public class RegisterRampActivity extends AppCompatActivity
     private Location currentLocation;
     private Bitmap imageBitmap;
 
-    private Button mGetLocationButton;
     private EditText mDescriptionBox;
     private ImageView mImageView;
     private Button mRegisterRampButton;
@@ -45,12 +44,14 @@ public class RegisterRampActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_ramp);
 
-        mGetLocationButton = (Button) findViewById(R.id.button_current_location);
+        registerListeners();
+    }
+
+    private void registerListeners() {
         mDescriptionBox = (EditText) findViewById(R.id.edit_text_description);
         mImageView = (ImageView) findViewById(R.id.image_view_ramp);
         mRegisterRampButton = (Button) findViewById(R.id.button_register_ramp);
 
-        mGetLocationButton.setOnClickListener(this);
         mImageView.setOnClickListener(this);
         mRegisterRampButton.setOnClickListener(this);
     }
@@ -82,13 +83,9 @@ public class RegisterRampActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_current_location :
-                getDeviceLocation();
+            case R.id.image_view_ramp : dispatchTakePictureIntent();
                 break;
-            case R.id.image_view_ramp :
-                dispatchTakePictureIntent();
-                break;
-            case R.id.button_register_ramp :
+            case R.id.button_register_ramp : getDeviceLocation();
                 buildRamp();
                 this.finish();
                 break;
@@ -96,20 +93,20 @@ public class RegisterRampActivity extends AppCompatActivity
     }
 
     private void buildRamp() {
-        if (currentLocation == null && imageBitmap == null) {
+        if (currentLocation == null || imageBitmap == null) {
             errorHandler();
             return;
         }
-        MapManager.registerRamp(mDescriptionBox.getText().toString(),
+        RampManager.registerRamp(mDescriptionBox.getText().toString(),
                 currentLocation.getLatitude(),
                 currentLocation.getLongitude());
     }
 
     private void errorHandler() {
         if (currentLocation == null) {
-            Toast.makeText(this, "The location is invalid", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "The location is invalid", Toast.LENGTH_SHORT).show();
         } else if (imageBitmap == null) {
-            Toast.makeText(this, "Please set an image", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please set an image", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -120,7 +117,5 @@ public class RegisterRampActivity extends AppCompatActivity
             mLocationPermissionGranted = false;
             return;
         }
-        mLocationPermissionGranted = true;
-        gMap.setMyLocationEnabled(true);
     }
 }

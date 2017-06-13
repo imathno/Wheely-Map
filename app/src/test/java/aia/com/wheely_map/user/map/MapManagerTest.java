@@ -3,7 +3,7 @@ package aia.com.wheely_map.user.map;
 import org.junit.Before;
 import org.junit.Test;
 
-import aia.com.wheely_map.map.MapManager;
+import aia.com.wheely_map.map.RampManager;
 import aia.com.wheely_map.map.Ramp;
 
 import static junit.framework.Assert.assertFalse;
@@ -17,20 +17,20 @@ public class MapManagerTest {
 
     @Test
     public void registerRampTest() {
-        MapManager.registerRamp("TEST", -1, -1);
+        RampManager.registerRamp("TEST", -1, -1);
 
-        Ramp findThisRamp = MapManager.findRamp(-1 , -1);
+        Ramp findThisRamp = RampManager.findRamp(-1 , -1);
         assertTrue(findThisRamp != null);
-        MapManager.getRegisteredRamps().remove(findThisRamp);
+        RampManager.getRegisteredRamps().remove(findThisRamp);
     }
 
     @Test
     public void findRampTest() {
-        MapManager.registerRamp("TEST", -1, -1);
+        RampManager.registerRamp("TEST", -1, -1);
 
-        assertFalse(MapManager.findRamp(-1, -2) != null);
-        assertTrue(MapManager.findRamp(-1, -1) != null);
+        assertFalse(RampManager.findRamp(-1, -2) != null);
+        assertTrue(RampManager.findRamp(-1, -1) != null);
 
-        MapManager.getRegisteredRamps().remove(MapManager.findRamp(-1, -1));
+        RampManager.getRegisteredRamps().remove(RampManager.findRamp(-1, -1));
     }
 }

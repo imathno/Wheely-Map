@@ -5,22 +5,26 @@ import android.util.Log;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.plus.model.people.Person;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private static final String TAG = User.class.getSimpleName();
 
-    private GoogleSignInAccount user;
-
-    private String username;
     private final String USER_ID;
-
+    private String username;
     private long userPoints;
 
     public User(GoogleSignInAccount user) {
-        this.user = user;
         username = user.getDisplayName();
         USER_ID = user.getId();
         this.userPoints = 0;
+    }
+
+    public User() {
+        username = "TEST";
+        USER_ID = "TEST";
     }
 
     public void setUserPoints(long points) {
@@ -47,6 +51,10 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getUSER_ID() {
+        return USER_ID;
     }
 
     public long getUserPoints() {
