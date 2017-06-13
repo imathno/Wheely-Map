@@ -12,17 +12,11 @@ public class User {
 
     private static final String TAG = User.class.getSimpleName();
 
-    private static List<User> registeredUsers = new ArrayList<>();
-
-    private GoogleSignInAccount user;
-
-    private String username;
     private final String USER_ID;
-
+    private String username;
     private long userPoints;
 
     public User(GoogleSignInAccount user) {
-        this.user = user;
         username = user.getDisplayName();
         USER_ID = user.getId();
         this.userPoints = 0;
@@ -59,6 +53,10 @@ public class User {
         return username;
     }
 
+    public String getUSER_ID() {
+        return USER_ID;
+    }
+
     public long getUserPoints() {
         return userPoints;
     }
@@ -66,6 +64,4 @@ public class User {
     private static void negativePointsError(long points) {
         Log.e(TAG, "Attempted to use negative points " + points);
     }
-
-    public User findUserByID()
 }

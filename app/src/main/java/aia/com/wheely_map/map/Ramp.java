@@ -3,10 +3,11 @@ package aia.com.wheely_map.map;
 import android.graphics.Bitmap;
 
 import aia.com.wheely_map.user.User;
+import aia.com.wheely_map.user.UserManager;
 
 public class Ramp {
 
-    private final String REGISTERED_BY;
+    private final User REGISTERED_BY;
 
     private String description;
     private Bitmap rampImage;
@@ -22,7 +23,7 @@ public class Ramp {
     }
 
     public Ramp(String userId, String description, Bitmap rampImage, double latitude, double longitude) {
-        this.
+        this(UserManager.findUserByID(userId), description, rampImage, latitude, longitude);
     }
 
     public User getREGISTERED_BY() {
