@@ -6,7 +6,7 @@ import aia.com.wheely_map.user.User;
 
 public class Ramp {
 
-    private final User REGISTERED_BY;
+    private final String REGISTERED_BY;
 
     private String description;
     private Bitmap rampImage;
@@ -19,6 +19,10 @@ public class Ramp {
         this.rampImage = rampImage;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public Ramp(String userId, String description, Bitmap rampImage, double latitude, double longitude) {
+        this.
     }
 
     public User getREGISTERED_BY() {

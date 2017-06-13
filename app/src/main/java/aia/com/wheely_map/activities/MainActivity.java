@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import aia.com.wheely_map.R;
 import aia.com.wheely_map.fragments.MapsFragment;
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity
         UserManager.setLoggedInUser(user);
 
         RampManager.registerRamp("TEST", 47.6062, -122);
-
         setUpMapFragment();
 
         FragmentManager fragmentManager = getFragmentManager();

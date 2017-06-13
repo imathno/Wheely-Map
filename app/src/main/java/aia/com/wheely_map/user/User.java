@@ -5,9 +5,14 @@ import android.util.Log;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.plus.model.people.Person;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private static final String TAG = User.class.getSimpleName();
+
+    private static List<User> registeredUsers = new ArrayList<>();
 
     private GoogleSignInAccount user;
 
@@ -61,4 +66,6 @@ public class User {
     private static void negativePointsError(long points) {
         Log.e(TAG, "Attempted to use negative points " + points);
     }
+
+    public User findUserByID()
 }

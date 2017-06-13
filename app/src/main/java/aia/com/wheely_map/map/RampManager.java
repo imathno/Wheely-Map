@@ -1,5 +1,7 @@
 package aia.com.wheely_map.map;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public abstract class RampManager {
     private static final String TAG = RampManager.class.getSimpleName();
 
     private static List<Ramp> registeredRamps;
-    private static List<Ramp> toAddMarker;
+    private static List<Ramp> toAddOnMap;
 
     public static boolean registerRamp(String description, double latitude, double longitude) {
         if (registeredRamps == null) {
@@ -18,6 +20,7 @@ public abstract class RampManager {
         }
 
         if (findRamp(longitude, latitude) == null) {
+            Log.d(TAG, "registerRamp:Creating New Ramp");
             Ramp newRamp = new Ramp(UserManager.getLoggedInUser(), description, null, longitude, latitude);
             registeredRamps.add(newRamp);
             addMarker(newRamp);
@@ -27,10 +30,10 @@ public abstract class RampManager {
     }
 
     public static void addMarker(Ramp ramp) {
-        if (toAddMarker == null) {
-            toAddMarker = new ArrayList<>();
+        if (toAddOnMap == null) {
+            toAddOnMap = new ArrayList<>();
         }
-        toAddMarker.add(ramp);
+        toAddOnMap.add(ramp);
     }
 
     public static Ramp findRamp(double latitude, double longitude) {
@@ -46,7 +49,7 @@ public abstract class RampManager {
         return registeredRamps;
     }
 
-    public static List<Ramp> getToAddMarkerList() {
-        return toAddMarker;
+    public synchronized static List<Ramp> getToAddOnMap() {
+        return toAddOnMap;
     }
 }
