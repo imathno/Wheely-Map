@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,10 +40,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        User user = new User();
-        UserManager.setLoggedInUser(user);
+        RampManager.registerRamp("TEST", -1, -1);
 
-        RampManager.registerRamp("TEST", 47.6062, -122);
         setUpMapFragment();
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -61,9 +60,9 @@ public class MainActivity extends AppCompatActivity
 
     private void registerListeners() {
         Log.d(TAG, "registerListeners:Registering Listeners");
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_main);
-        navigationView.setNavigationItemSelectedListener(this);
+        //navigationView.setNavigationItemSelectedListener(this);
         fab.setOnClickListener(this);
         Log.d(TAG, "registerListeners:Listeners Registered");
     }

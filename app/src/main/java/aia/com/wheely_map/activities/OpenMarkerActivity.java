@@ -18,12 +18,17 @@ public class OpenMarkerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open_marker);
 
         Bundle bundle = getIntent().getExtras();
-        Ramp ramp = (Ramp) bundle.get("ramp");
-        String description = ramp.getDescription();
-        Bitmap rampImage = ramp.getRampImage();
+        String description = (String)bundle.get("description");
 
         ImageView imageView = (ImageView) findViewById(R.id.image_ramp);
-        imageView.setImageBitmap(rampImage);
+
+        if (description.contains("attack")) {
+            imageView.setBackgroundResource(R.drawable.ramp1);
+        } else if (description.contains("hole")) {
+            imageView.setBackgroundResource(R.drawable.ramp2);
+        } else {
+            imageView.setBackgroundResource(R.drawable.ramp3);
+        }
 
         TextView textView = (TextView) findViewById(R.id.text_description);
         textView.setText(description);
