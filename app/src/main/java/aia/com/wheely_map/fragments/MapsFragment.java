@@ -37,79 +37,13 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
     private static MapsFragment instance;
     private static List<Ramp> rampsOnMap;
 
-    private static List<Ramp> rampsToAddOnMap;
-
     public GoogleMap mMap;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rampsOnMap = new ArrayList<>();
-
         getMapAsync(this);
-
-        parseData();
-        loadMarkers();
-    }
-
-    private void parseData() {
-        if (rampsOnMap == null) {
-            rampsToAddOnMap = new ArrayList<>();
-        }
-
-        String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-        File file = new File("stored_ramps.aia");
-        try {
-            Log.d(TAG, "parseData: creating file " + file.createNewFile());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Scanner fileParser = null;
-        try {
-            fileParser = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            Log.d(TAG, "parseData:Dir:" + file.getAbsolutePath() + " Not Found");
-        }
-
-        String userId = null;
-        String description = null;
-        String lat = null;
-        String lng = null;
-
-        while (fileParser.hasNextLine()) {
-            String input = fileParser.nextLine();
-            if (input.equals("<")) {
-                userId = null;
-                description = null;
-                lat = null;
-                lng = null;
-            } else if (!input.contains("<") || input.contains(">")) {
-                if (input.contains("userid")) {
-                    if (input.equals("test")) {
-                        UserManager.enableTestUser();
-                    }
-                    userId = parseToken(input);
-                } else if (input.contains("description")) {
-                    description = parseToken(input);
-                } else if (input.contains("lat")) {
-                    lat = parseToken(input);
-                } else if (input.contains("lng")) {
-                    lng = parseToken(input);
-                }
-            } else if (input.equals(">")) {
-                Ramp ramp = new Ramp(userId,
-                                    description,
-                                    null,
-                                    Double.parseDouble(lat), Double.parseDouble(lng));
-                rampsToAddOnMap.add(ramp);
-            } else {
-                Log.d(TAG, "parseData:Something Broke");
-            }
-        }
-    }
-
-    private String parseToken(String str) {
-        return str.substring(str.indexOf(':') + 1);
     }
 
     @Override
@@ -128,22 +62,6 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
     private void setUpMap() {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(47.6062, -122)));
-
-        loadMarkers();
-    }
-
-    private void loadMarkers() {
-        if (mMap != null) {
-            Log.d(TAG, "loadMarkers:Loading Markers <- well should be");
-            for (Ramp ramp : rampsToAddOnMap) {
-                Log.d(TAG, "loadMarkers:Current ramp " +
-                        "\n Descrip:" + ramp.getDescription() +
-                        "\n LatLng:" + ramp.getLatitude() + " " + ramp.getLongitude() +
-                        "\n RegisteredBy:" + ramp.getREGISTERED_BY().getUsername());
-                mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(ramp.getLatitude(), ramp.getLongitude())));
-            }
-        }
     }
 
     public boolean setMarker(Ramp ramp) {
