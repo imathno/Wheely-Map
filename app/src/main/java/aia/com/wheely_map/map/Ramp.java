@@ -38,11 +38,11 @@ public class Ramp {
         return rampImage;
     }
 
-    public double getLatitude() {
+    public synchronized double getLatitude() {
         return latitude;
     }
 
-    public double getLongitude() {
+    public synchronized double getLongitude() {
         return longitude;
     }
 }

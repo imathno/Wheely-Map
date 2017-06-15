@@ -40,7 +40,7 @@ public abstract class RampManager {
         return null;
     }
 
-    public static List<Ramp> getRegisteredRamps() {
+    public synchronized static List<Ramp> getRegisteredRamps() {
         return registeredRamps;
     }
 }

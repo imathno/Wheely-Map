@@ -18,12 +18,9 @@ public class OpenMarkerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open_marker);
 
         Bundle bundle = getIntent().getExtras();
-        Ramp ramp = (Ramp) bundle.get("ramp");
-        String description = ramp.getDescription();
-        Bitmap rampImage = ramp.getRampImage();
+        String description = bundle.getString("description");
 
         ImageView imageView = (ImageView) findViewById(R.id.image_ramp);
-        imageView.setImageBitmap(rampImage);
 
         TextView textView = (TextView) findViewById(R.id.text_description);
         textView.setText(description);

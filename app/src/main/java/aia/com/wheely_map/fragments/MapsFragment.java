@@ -1,5 +1,6 @@
 package aia.com.wheely_map.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import java.util.Scanner;
 import aia.com.wheely_map.activities.OpenMarkerActivity;
 import aia.com.wheely_map.map.Ramp;
 import aia.com.wheely_map.map.RampManager;
+import aia.com.wheely_map.user.User;
 import aia.com.wheely_map.user.UserManager;
 
 import static aia.com.wheely_map.utils.ActivityUtils.openActivity;
@@ -56,6 +58,10 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         Log.d(TAG, "onMapReady GoogleMap googleMap:" + googleMap);
+
+        for(Ramp ramp : RampManager.getRegisteredRamps()) {
+            setMarker(ramp);
+        }
         setUpMap();
     }
 
@@ -83,7 +89,9 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
         LatLng position = marker.getPosition();
         Ramp clickedMarker = RampManager.findRamp(position.latitude, position.longitude);
         if (clickedMarker != null) {
-            openActivity(getContext(), OpenMarkerActivity.class);
+            Intent intent = new Intent(getContext(), OpenMarkerActivity.class);
+            intent.putExtra("description", clickedMarker.getDescription());
+            startActivity(intent);
         }
         return true;
     }
@@ -97,9 +105,5 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
 
         instance.setArguments(args);
         return instance;
-    }
-
-    public GoogleMap getmMap() {
-        return mMap;
     }
 }
