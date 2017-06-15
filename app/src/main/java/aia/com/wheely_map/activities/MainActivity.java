@@ -2,9 +2,7 @@ package aia.com.wheely_map.activities;
 
 
 import android.app.FragmentManager;
-import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,19 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import aia.com.wheely_map.R;
 import aia.com.wheely_map.fragments.MapsFragment;
-import aia.com.wheely_map.map.Ramp;
 import aia.com.wheely_map.map.RampManager;
-import aia.com.wheely_map.user.User;
-import aia.com.wheely_map.user.UserManager;
-import aia.com.wheely_map.utils.ActivityUtils;
 
 import static aia.com.wheely_map.utils.ActivityUtils.openActivity;
 

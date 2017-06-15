@@ -1,6 +1,5 @@
 package aia.com.wheely_map.activities;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import aia.com.wheely_map.R;
-import aia.com.wheely_map.map.Ramp;
 
 public class OpenMarkerActivity extends AppCompatActivity {
 
