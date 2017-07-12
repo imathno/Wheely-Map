@@ -1,6 +1,6 @@
 # Wheely-Map
 
-# Update 1 7/11/17
+# Update 1 [7/11/17]
 PROJECT DISCONTINUED GOOGLE IS IMPLEMENTING THEIR WHEELCHAIR ACCESSIBLITY ON GOOGLE MAPS ITSELF
 
 ## Wheel Map is a open source project that has many goals to it.
