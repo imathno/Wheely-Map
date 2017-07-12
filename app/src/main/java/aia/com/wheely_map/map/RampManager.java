@@ -27,10 +27,6 @@ public abstract class RampManager {
         return false;
     }
 
-    private void storeRamp() {
-
-    }
-
     public static Ramp findRamp(double latitude, double longitude) {
         for (Ramp ramp : registeredRamps) {
             if (ramp.getLatitude() == latitude && ramp.getLongitude() == longitude) {
@@ -38,6 +34,10 @@ public abstract class RampManager {
             }
         }
         return null;
+    }
+
+    public static void addRampToRegisteredRamps(Ramp ramp) {
+        registeredRamps.add(ramp);
     }
 
     public static List<Ramp> getRegisteredRamps() {

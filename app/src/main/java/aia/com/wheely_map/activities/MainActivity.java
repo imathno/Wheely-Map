@@ -2,9 +2,7 @@ package aia.com.wheely_map.activities;
 
 
 import android.app.FragmentManager;
-import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,17 +12,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import aia.com.wheely_map.R;
 import aia.com.wheely_map.fragments.MapsFragment;
-import aia.com.wheely_map.map.Ramp;
 import aia.com.wheely_map.map.RampManager;
-import aia.com.wheely_map.user.User;
-import aia.com.wheely_map.user.UserManager;
-import aia.com.wheely_map.utils.ActivityUtils;
 
 import static aia.com.wheely_map.utils.ActivityUtils.openActivity;
 
@@ -39,10 +29,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        User user = new User();
-        UserManager.setLoggedInUser(user);
+        RampManager.registerRamp("TEST", -1, -1);
 
-        RampManager.registerRamp("TEST", 47.6062, -122);
         setUpMapFragment();
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -61,9 +49,9 @@ public class MainActivity extends AppCompatActivity
 
     private void registerListeners() {
         Log.d(TAG, "registerListeners:Registering Listeners");
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_main);
-        navigationView.setNavigationItemSelectedListener(this);
+        //navigationView.setNavigationItemSelectedListener(this);
         fab.setOnClickListener(this);
         Log.d(TAG, "registerListeners:Listeners Registered");
     }

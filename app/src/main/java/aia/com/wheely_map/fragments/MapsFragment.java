@@ -1,7 +1,9 @@
 package aia.com.wheely_map.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +29,7 @@ import java.util.Scanner;
 import aia.com.wheely_map.activities.OpenMarkerActivity;
 import aia.com.wheely_map.map.Ramp;
 import aia.com.wheely_map.map.RampManager;
+import aia.com.wheely_map.user.User;
 import aia.com.wheely_map.user.UserManager;
 
 import static aia.com.wheely_map.utils.ActivityUtils.openActivity;
@@ -56,6 +60,23 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         Log.d(TAG, "onMapReady GoogleMap googleMap:" + googleMap);
+        UserManager.enableTestUser();
+        User user = new User();
+
+        Ramp demo1 = new Ramp(user, "This ramp has a high angle of attack", null, 37.7749, -122.4194);
+        Ramp demo2 = new Ramp(user, "This ramp has no grip", null, 47.6205, -122.3493);
+        Ramp demo3 = new Ramp(user, "This ramp has a fat hole right in the middle of it", null, 47.576063, -122.292813);
+
+        RampManager.addRampToRegisteredRamps(demo1);
+        RampManager.addRampToRegisteredRamps(demo2);
+        RampManager.addRampToRegisteredRamps(demo3);
+
+        setMarker(demo1);
+        setMarker(demo2);
+        setMarker(demo3);
+
+        mMap.setOnMarkerClickListener(this);
+
         setUpMap();
     }
 
@@ -83,7 +104,9 @@ public class MapsFragment extends MapFragment implements OnMapReadyCallback, Goo
         LatLng position = marker.getPosition();
         Ramp clickedMarker = RampManager.findRamp(position.latitude, position.longitude);
         if (clickedMarker != null) {
-            openActivity(getContext(), OpenMarkerActivity.class);
+            Intent intent = new Intent(getContext(), OpenMarkerActivity.class);
+            intent.putExtra("description", clickedMarker.getDescription());
+            startActivity(intent);
         }
         return true;
     }
